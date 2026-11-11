@@ -1,0 +1,17 @@
+{
+  "expo": {
+    "name": "Fieldproof",
+    "slug": "fieldproof",
+    "owner": "arabzakiyyah",
+    "version": "1.0.0",
+    "ios": {
+      "bundleIdentifier": "com.fieldproof.preview",
+      "supportsTablet": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "1fe04928-17e2-49ec-9d41-a7c5047db9a6"
+      }
+    }
+  }
+}

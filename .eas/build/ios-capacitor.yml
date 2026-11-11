@@ -1,0 +1,28 @@
+{
+  "build": {
+    "name": "Fieldproof iPad preview",
+    "steps": [
+      "eas/checkout",
+      "eas/install_node_modules",
+      {
+        "run": {
+          "name": "Build Fieldproof screens and sync iOS",
+          "command": "npm --prefix web ci\nnpm run build\nnpx cap sync ios"
+        }
+      },
+      "eas/configure_ios_credentials",
+      {
+        "eas/generate_gymfile_from_template": {
+          "inputs": {
+            "credentials": "${ eas.job.secrets.buildCredentials }",
+            "scheme": "App",
+            "build_configuration": "Release",
+            "template": "project(File.expand_path(\"App/App.xcodeproj\", __dir__))\nscheme(\"App\")\nconfiguration(\"Release\")\ndestination(\"generic/platform=iOS\")\nclean(true)\nexport_options({method: \"<%- EXPORT_METHOD %>\", provisioningProfiles: {<% _.forEach(PROFILES, function(profile) { %>\"<%- profile.BUNDLE_ID %>\" => \"<%- profile.UUID %>\",<% }); %>}})\nexport_xcargs \"OTHER_CODE_SIGN_FLAGS=\\\"--keychain <%- KEYCHAIN_PATH %>\\\"\"\ndisable_xcpretty(true)\nbuildlog_path(\"<%- LOGS_DIRECTORY %>\")\noutput_directory(\"<%- OUTPUT_DIRECTORY %>\")"
+          }
+        }
+      },
+      "eas/run_fastlane",
+      "eas/find_and_upload_build_artifacts"
+    ]
+  }
+}

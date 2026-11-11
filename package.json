@@ -1,0 +1,26 @@
+{
+  "name": "fieldproof",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Verified attendance, checklists and customer sign-off for field service companies.",
+  "scripts": {
+    "install:all": "npm --prefix server install && npm --prefix web install",
+    "build": "npm --prefix web run build",
+    "start": "npm --prefix server start",
+    "dev:server": "npm --prefix server run dev",
+    "dev:web": "npm --prefix web run dev",
+    "seed": "npm --prefix server run seed -- --force",
+    "test": "npm --prefix server test && npm --prefix web run check:i18n"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.6.0",
+    "@capacitor/core": "^8.6.0",
+    "@capacitor/ios": "^8.6.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.6.0"
+  }
+}
